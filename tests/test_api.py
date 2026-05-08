@@ -1,5 +1,3 @@
-"""Інтеграційні тести FastAPI endpoint-ів."""
-
 from fastapi.testclient import TestClient
 
 from app.main import MODEL_PATH, app
@@ -12,7 +10,7 @@ client = TestClient(app)
 
 
 def test_root_endpoint() -> None:
-    """Перевіряє базовий endpoint /."""
+
     response = client.get("/")
 
     assert response.status_code == 200
@@ -20,7 +18,6 @@ def test_root_endpoint() -> None:
 
 
 def test_health_endpoint() -> None:
-    """Перевіряє endpoint /health."""
     response = client.get("/health")
 
     assert response.status_code == 200
@@ -30,7 +27,6 @@ def test_health_endpoint() -> None:
 
 
 def test_predict_setosa() -> None:
-    """Перевіряє коректний прогноз для типової квітки setosa."""
     payload = {
         "sepal_length": 5.1,
         "sepal_width": 3.5,
@@ -47,7 +43,6 @@ def test_predict_setosa() -> None:
 
 
 def test_predict_invalid_input() -> None:
-    """Перевіряє, що Pydantic повертає 422 для некоректного JSON."""
     payload = {"sepal_length": "not-a-number"}
 
     response = client.post("/predict", json=payload)

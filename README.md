@@ -3,9 +3,7 @@
 > **Тема:** CI/CD та ML API  
 > **Мета:** реалізувати повний навчальний MLOps-конвеєр: ML-модель → FastAPI REST API → тести → Docker → GitHub Actions → Render.
 
-![CI](https://github.com/USERNAME/REPOSITORY/actions/workflows/ci.yml/badge.svg)
-
-> Перед здачею замініть `USERNAME/REPOSITORY` у badge на власний GitHub-репозиторій.
+![CI](https://github.com/YuliiaIvakhnenko/mlops/actions/workflows/ci.yml/badge.svg)
 
 ---
 
@@ -77,8 +75,8 @@ mlops_lab2_ml_api/
 ### 4.1. Клонування репозиторію
 
 ```bash
-git clone https://github.com/USERNAME/REPOSITORY.git
-cd REPOSITORY
+git clone -b lr2 https://github.com/YuliiaIvakhnenko/mlops.git
+cd mlops
 ```
 
 ### 4.2. Створення віртуального середовища
@@ -120,6 +118,13 @@ python -m ml.train
 
 ```text
 Model trained. Test accuracy: 0.9333
+Saved to: .../model.joblib
+```
+
+Фактичний результат під час перевірки:
+
+```text
+Model trained. Test accuracy: 0.9667
 Saved to: .../model.joblib
 ```
 
@@ -212,6 +217,8 @@ POST /predict
 
 ## 6. Запуск тестів
 
+Для запуску тестів використовується команда:
+
 ```bash
 pytest -q
 ```
@@ -221,6 +228,14 @@ pytest -q
 ```text
 6 passed
 ```
+
+Фактичний результат виконання:
+
+```text
+6 passed, 4 warnings
+```
+
+Попередження не є критичними помилками та пов'язані з deprecated-повідомленнями бібліотек. Усі тести пройшли успішно.
 
 Тести перевіряють:
 
@@ -253,6 +268,17 @@ docker run --rm -p 8000:8000 ml-api:lab2
 ```text
 http://127.0.0.1:8000/health
 ```
+
+Фактичний результат перевірки endpoint `/health`:
+
+```json
+{
+  "status": "healthy",
+  "model_loaded": true
+}
+```
+
+Це підтверджує, що API успішно працює всередині Docker-контейнера.
 
 ---
 
@@ -314,7 +340,7 @@ https://your-service-name.onrender.com/health
 ### Посилання на деплой
 
 ```text
-Render URL: додати після розгортання
+Render URL: сервіс підготовлено до розгортання на Render. Публічний URL буде додано після створення Web Service.
 ```
 
 ---
@@ -395,6 +421,23 @@ FastAPI використовує Pydantic-схему `IrisFeatures`. У ній �
 
 ---
 
-## 12. Висновок
+## 12. Фактичні результати перевірки
+
+Після локального запуску проєкту було отримано такі результати:
+
+| Перевірка | Результат |
+|---|---|
+| Тренування моделі | `Test accuracy: 0.9667` |
+| Запуск тестів | `6 passed, 4 warnings` |
+| Локальний запуск API | Swagger UI доступний за `http://127.0.0.1:8000/docs` |
+| Endpoint `/health` | `{"status":"healthy","model_loaded":true}` |
+| Endpoint `/predict` | модель повертає клас `setosa` |
+| Docker-запуск | контейнер успішно запущено на порту `8000` |
+
+Отримані результати підтверджують, що ML-модель навчена, API працює локально, тести проходять успішно, а Docker-контейнер коректно запускає сервіс.
+
+---
+
+## 13. Висновок
 
 У лабораторній роботі реалізовано повний навчальний MLOps-конвеєр. Було створено ML-модель для класифікації Iris, збережено її як артефакт `model.joblib`, розроблено REST API на FastAPI, написано тести для моделі та API, додано Dockerfile для контейнеризації та GitHub Actions workflow для автоматичного запуску перевірок. Проєкт готовий до локального запуску, тестування, контейнеризації та розгортання на Render.
