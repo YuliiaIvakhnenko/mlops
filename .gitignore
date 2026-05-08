@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files tracked by DVC
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+!data/raw/*.dvc
+!data/processed/*.dvc
+!data/external/*.dvc
+
+# Models tracked by DVC
+models/*
+!models/.gitkeep
+!models/*.dvc
+!models/experiment_results.csv
+
+# MLflow local artifacts
+mlruns/
+mlartifacts/
+mlflow.db
+
+# DVC local cache
+.dvc/cache/
+.dvc/tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
