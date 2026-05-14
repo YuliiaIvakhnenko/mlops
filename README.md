@@ -339,11 +339,11 @@ https://your-service-name.onrender.com/health
 
 ### Посилання на деплой
 
-```text
-Render URL: сервіс підготовлено до розгортання на Render. Публічний URL буде додано після створення Web Service.
-```
+Render: https://mlops-lr2.onrender.com
 
----
+Health check: https://mlops-lr2.onrender.com/health
+
+API docs: https://mlops-lr2.onrender.com/docs
 
 ## 10. Приклад `curl`-запиту
 
